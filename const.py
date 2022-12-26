@@ -11,6 +11,8 @@ PATH_TO_FILE_FLAG = '--path-to-file'
 PATH_TO_FILE_FLAG_SHORT = '-f'
 DEBUG_FLAG = '--debug'
 DEBUG_FLAG_SHORT = '-d'
+SCHEMA_FLAG = '--schema'
+SCHEMA_FLAG_SHORT = '-s'
 
 
 # arg parse help
@@ -21,3 +23,4 @@ PASSWORD_ARGPARSE_HELP = 'an password for auth when connecting to database'
 ROW_COUNT_ARGPARSE_HELP = 'an row count for generating a certain number of rows (default: 1)'
 PATH_TO_FILE_ARGPARSE_HELP = 'an path to file for reading data from file (default: ./)'
 DEBUG_ARGPARSE_HELP = 'an debug for debugging (default: false)'
+SCHEMA_ARGPARSE_HELP = 'an schema/table name'

@@ -1,3 +1,5 @@
+import uuid
+
 import const
 import config
 import logging
@@ -68,6 +70,14 @@ def main() -> None:
         default=False,
         help=const.DEBUG_ARGPARSE_HELP
     )
+    parser.add_argument(
+        const.SCHEMA_FLAG_SHORT,
+        const.SCHEMA_FLAG,
+        dest=const.SCHEMA_FLAG[2:],
+        type=bool,
+        default=False,
+        help=const.SCHEMA_ARGPARSE_HELP
+    )
 
     args = parser.parse_args()
 
@@ -77,6 +87,7 @@ def main() -> None:
     row_count = args.row_count
     path_to_file = args.path_to_file
     debug = args.debug
+    schema = args.schema
 
     if len(connection) == 0 or len(username) == 0 or len(password) == 0:
         raise error.ArgsParseException('--connection or --username or --password must not be empty!')
@@ -89,8 +100,12 @@ def main() -> None:
     data_manager = ManageData(
         url=connection,
         username=username,
-        password=password
+        password=password,
+        app_name=str(uuid.uuid4()),
+        master=config.SPARK_MASTER
     )
+
+    data_manager.generate(schema, row_count, config.ITERATIONS_IN_STEPS)
 
 
 if __name__ == '__main__':
