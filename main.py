@@ -9,7 +9,7 @@ from src.manage_data import ManageData
 from src import error
 
 
-logging.basicConfig(filename=config.LOG_FOLDER + utils.get_log_file_name(), level=logging.DEBUG)
+# logging.basicConfig(filename=config.LOG_FOLDER + utils.get_log_file_name(), level=logging.DEBUG)
 
 
 def main() -> None:
@@ -74,8 +74,8 @@ def main() -> None:
         const.SCHEMA_FLAG_SHORT,
         const.SCHEMA_FLAG,
         dest=const.SCHEMA_FLAG[2:],
-        type=bool,
-        default=False,
+        type=str,
+        default='',
         help=const.SCHEMA_ARGPARSE_HELP
     )
 
@@ -89,13 +89,13 @@ def main() -> None:
     debug = args.debug
     schema = args.schema
 
-    if len(connection) == 0 or len(username) == 0 or len(password) == 0:
-        raise error.ArgsParseException('--connection or --username or --password must not be empty!')
+    # if len(connection) == 0 or len(username) == 0 or len(password) == 0:
+    #     raise error.ArgsParseException('--connection or --username or --password must not be empty!')
+    #
+    # if row_count < 1:
+    #     raise error.ArgsParseException('--row-count must be more then 0!')
 
-    if row_count < 1:
-        raise error.ArgsParseException('--row-count must be more then 0!')
-
-    utils.logger('Args parse successfully', debug)
+    # utils.logger('Args parse successfully', debug)
 
     data_manager = ManageData(
         url=connection,
@@ -105,7 +105,15 @@ def main() -> None:
         master=config.SPARK_MASTER
     )
 
-    data_manager.generate(schema, row_count, config.ITERATIONS_IN_STEPS)
+    print(f'connection: {connection}')
+    print(f'username: {username}')
+    print(f'password: {password}')
+    print(f'schema: {schema}')
+    print(f'row_count: {row_count}')
+
+    df = data_manager.generate(schema, row_count, config.ITERATIONS_IN_STEPS)
+
+    df.show()
 
 
 if __name__ == '__main__':

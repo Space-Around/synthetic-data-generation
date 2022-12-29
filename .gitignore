@@ -1,2 +1,5 @@
 .mypy_cache
 .idea
+metastore_db
+logs
+spark-warehouse
