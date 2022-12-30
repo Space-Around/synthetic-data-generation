@@ -60,18 +60,20 @@ def test_generate_table():
     #     StructField('date', DateType(), True),
     # ])
 
-    md.spark.sql("CREATE DATABASE IF NOT EXISTS test")
-    md.spark.sql("CREATE TABLE IF NOT EXISTS test.sampleTable ("
-                 "int_t Int, "
-                 "str_t String,"
-                 "float_t Float,"
-                 "double_t Double,"
-                 "bigint_t Bigint,"
-                 # "timestamp_t TIMESTAMP"
-                 "date_t Date,"
-                 "bool_t Boolean"
-                 # "bin_t Binary"
-                 ")")
+    # md.spark.sql("SELECT test.sampleTable ")
+
+    # md.spark.sql("CREATE DATABASE IF NOT EXISTS test")
+    # md.spark.sql("CREATE TABLE IF NOT EXISTS test.sampleTable ("
+    #              "int_t Int, "
+    #              "str_t String,"
+    #              "float_t Float,"
+    #              "double_t Double,"
+    #              "bigint_t Bigint,"
+    #              # "timestamp_t TIMESTAMP"
+    #              "date_t Date,"
+    #              "bool_t Boolean"
+    #              # "bin_t Binary"
+    #              ")")
 
     # return md.generate(
     #     table_name='test.sampleTable',
